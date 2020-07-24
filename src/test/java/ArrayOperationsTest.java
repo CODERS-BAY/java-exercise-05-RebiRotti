@@ -53,7 +53,7 @@ class ArrayOperationsTest {
         Arrays.sort(numbers);
         int[] expected = new int[numbers.length];
         int index = 0;
-        for (int i = numbers.length - 1; i > 0; i--) {
+        for (int i = numbers.length - 1; i >= 0; i--) {
             expected[index++] = numbers[i];
         }
 

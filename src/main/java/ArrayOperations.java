@@ -28,28 +28,17 @@ public class ArrayOperations {
      * @return the sorted numbers array.
      */
     public int[] sort() {
-//      For I = 0 to N-1 do:
         for(int i = 0; i < numbers.length; i++) {
-//          Smallsub = I
-            int smallsub = i;
-//          For J = I + 1 to N-1 do:
+            int smallest = i;
             for(int j = i + 1; j < numbers.length; j++) {
-//              If numbers(J) < numbers(Smallsub)
-                if(numbers[j] < numbers[smallsub]) {
-//                  Smallsub = J
-                    smallsub = j;
+                if(numbers[j] < numbers[smallest]) {
+                    smallest = j;
                 }
-//          End-For
             }
-//          Temp = numbers(I)
-            int temp = numbers[i];
-//          numbers(I) = numbers(Smallsub)
-            numbers[i] = numbers[smallsub];
-//          numbers(Smallsub) = Temp
-            numbers[smallsub] = temp;
-//      End-For
+            int memory = numbers[i];
+            numbers[i] = numbers[smallest];
+            numbers[smallest] = memory;
         }
-        // Default Wert gehört geändert
         return numbers;
     }
 
@@ -61,9 +50,40 @@ public class ArrayOperations {
      * @see <a href="sorting algortihms">http://faculty.cs.niu.edu/~hutchins/csci241/sorting.htm</a>
      */
     public int[] revertSort() {
-
+        /**
+             for every entry in numbers i
+                 int highest is i
+                 for every entry is j = i
+                     if numbers[j] > numbers[highest]
+                        highest = j
+                     endif
+                 end for
+                 int memory = numbers[i]
+                 numbers[i] = numbers[highest]
+                 numbers[highest] = memory
+             end for
+         */
+        for (int entry:numbers) {
+            System.out.print(entry + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < numbers.length; i++) {
+            int highest = i;
+            for(int j = i + 1; j < numbers.length; j++) {
+                if(numbers[j] > numbers[highest]) {
+                    highest = j;
+                }
+            }
+            int memory = numbers[i];
+            numbers[i] = numbers[highest];
+            numbers[highest] = memory;
+        }
         // Default Wert gehört geändert
-        return null;
+        for (int entry:numbers) {
+            System.out.print(entry + " ");
+        }
+        System.out.println();
+        return numbers;
     }
 
     /**
@@ -80,18 +100,28 @@ public class ArrayOperations {
      * @return true if the array contains the value, false otherwise.
      */
     public boolean contains(int value) {
-
-        // Default Wert gehört geändert
-        return false;
+        boolean searched = false;
+        for(int i = 0; i < numbers.length; i++) {
+            // Frage an Lukas: Wieso gibt er das im Test 2x aus? hab als result somit ein True und ein False...??
+            // System.out.println("Array: " + numbers[i] + " \ngesuchter Wert: " + value);
+            if(numbers[i] == value) {
+                searched = true;
+            }
+        }
+        System.out.println("searched value is: " + searched + " " + value);
+        return searched;
     }
 
     /**
      * @return the average value of all elements summed up.
      */
     public double average() {
-
+        double sum = 0;
+        for(int i = 0; i < numbers.length; i++) {
+            sum = sum + numbers[i];
+        }
         // Default Wert gehört geändert
-        return 0.0;
+        return sum/numbers.length;
     }
 
     /**
