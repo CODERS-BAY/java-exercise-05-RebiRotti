@@ -50,23 +50,10 @@ public class ArrayOperations {
      * @see <a href="sorting algortihms">http://faculty.cs.niu.edu/~hutchins/csci241/sorting.htm</a>
      */
     public int[] revertSort() {
-        /**
-             for every entry in numbers i
-                 int highest is i
-                 for every entry is j = i
-                     if numbers[j] > numbers[highest]
-                        highest = j
-                     endif
-                 end for
-                 int memory = numbers[i]
-                 numbers[i] = numbers[highest]
-                 numbers[highest] = memory
-             end for
-         */
-        for (int entry:numbers) {
-            System.out.print(entry + " ");
-        }
-        System.out.println();
+//        for (int entry:numbers) {
+//            System.out.print(entry + " ");
+//        }
+//        System.out.println();
         for(int i = 0; i < numbers.length; i++) {
             int highest = i;
             for(int j = i + 1; j < numbers.length; j++) {
@@ -79,10 +66,10 @@ public class ArrayOperations {
             numbers[highest] = memory;
         }
         // Default Wert gehört geändert
-        for (int entry:numbers) {
-            System.out.print(entry + " ");
-        }
-        System.out.println();
+//        for (int entry:numbers) {
+//            System.out.print(entry + " ");
+//        }
+//        System.out.println();
         return numbers;
     }
 
@@ -100,16 +87,12 @@ public class ArrayOperations {
      * @return true if the array contains the value, false otherwise.
      */
     public boolean contains(int value) {
-        boolean searched = false;
         for(int i = 0; i < numbers.length; i++) {
-            // Frage an Lukas: Wieso gibt er das im Test 2x aus? hab als result somit ein True und ein False...??
-            // System.out.println("Array: " + numbers[i] + " \ngesuchter Wert: " + value);
             if(numbers[i] == value) {
-                searched = true;
+                return true;
             }
         }
-        System.out.println("searched value is: " + searched + " " + value);
-        return searched;
+        return false;
     }
 
     /**
@@ -118,37 +101,59 @@ public class ArrayOperations {
     public double average() {
         double sum = 0;
         for(int i = 0; i < numbers.length; i++) {
-            sum = sum + numbers[i];
+            sum = (sum + numbers[i])/numbers.length;
         }
         // Default Wert gehört geändert
-        return sum/numbers.length;
+        return sum;
     }
 
     /**
      * @return the average value of all elements summed up, but without the highest and the lowest value.
      */
     public double trimmedMean() {
-
+        double trimmedMeanInt = 0;
+        int[] helper = sort();
+        int memory = helper.length - 1;
+        helper[0] = 0;
+        helper[memory] = 0;
+        for(int i = 0; i < helper.length; i++) {
+            trimmedMeanInt = trimmedMeanInt + helper[i];
+            System.out.println(helper[i]);
+        }
+        trimmedMeanInt = (trimmedMeanInt) / (helper.length-2);
         // Default Wert gehört geändert
-        return 0.0;
+        return trimmedMeanInt;
     }
 
     /**
      * @return the max value of the array. In the array [1,9,3] max would be 9.
      */
     public int maxValue() {
+        int maxInt = 0;
+        for(int i = 0; i < numbers.length; i++) {
+            if(maxInt < numbers[i]) {
+                maxInt = numbers[i];
+            }
+        }
 
-        // Default Wert gehört geändert
-        return 0;
+        return maxInt;
     }
 
     /**
      * @return the min value of the array. In the array [1,9,3] min would be 1.
      */
     public int minValue() {
+        int minInt = 1000000;
 
-        // Default Wert gehört geändert
-        return 0;
+        for(int i = 0; i < numbers.length; i++) {
+
+            System.out.println(numbers[i] + " " + minInt);
+            if(minInt > numbers[i]) {
+                minInt = numbers[i];
+            }
+        }
+
+        return minInt;
     }
     
      /* **********************************************************
